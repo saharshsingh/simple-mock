@@ -16,14 +16,14 @@ public class TestClassMock {
 
 	@Before
 	public void setup() {
-		mock = Mocker.mock(ClassToMock.class);
+		mock = MockHelper.mock(ClassToMock.class);
 		Assert.assertNotNull(mock);
 	}
 
 	@Test
 	public void test_setResponse_for_simple_case() {
 		SomeClass expectedResponse = new SomeClass();
-		mock.setResponse(expectedResponse, "returnSomeClass");
+		mock.setReturnValue(expectedResponse, "returnSomeClass");
 
 		SomeClass response = mock.getMocked().returnSomeClass();
 
@@ -34,8 +34,8 @@ public class TestClassMock {
 	public void test_setResponse_when_specific_argument_types_specified() {
 		SomeClass expectedNoArgResponse = new SomeClass();
 		SomeClass expectedArgsResponse = new SomeClass();
-		mock.setResponse(expectedNoArgResponse, "returnSomeClass");
-		mock.setResponse(expectedArgsResponse, "returnSomeClass", int.class,
+		mock.setReturnValue(expectedNoArgResponse, "returnSomeClass");
+		mock.setReturnValue(expectedArgsResponse, "returnSomeClass", int.class,
 				String.class);
 
 		SomeClass noArgResponse = mock.getMocked().returnSomeClass();
@@ -50,11 +50,11 @@ public class TestClassMock {
 		SomeClass expectedResponse = new SomeClass();
 
 		// only one method defined
-		mock.setResponse(expectedResponse, "noArgVersionNotDefined");
+		mock.setReturnValue(expectedResponse, "noArgVersionNotDefined");
 
 		// multiple methods defined
 		try {
-			mock.setResponse(new AnotherClass(), "returnAnotherClass");
+			mock.setReturnValue(new AnotherClass(), "returnAnotherClass");
 			Assert.fail("Expected " + MockException.class.getName()
 					+ " to be thrown!");
 		} catch (MockException e) {
