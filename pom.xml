@@ -52,13 +52,6 @@
 	      <version>4.11</version>
 	      <scope>test</scope>
 	    </dependency>
-
-	    <!-- Maven + Github -->
-	    <dependency>
-	      <groupId>com.github.github</groupId>
-	      <artifactId>site-maven-plugin</artifactId>
-	      <version>0.11</version>
-	    </dependency>
 	</dependencies>
 
 	<properties>
@@ -89,12 +82,9 @@
 	            <version>0.9</version>
 	            <configuration>
 	                <message>Creating site for ${project.url}</message>
-                    <noJekyll>true</noJekyll>
-                    <outputDirectory>${project.build.directory}/mvn-repo</outputDirectory>
-                    <branch>refs/heads/mvn-repo</branch>
-                    <includes><include>**/*</include></includes>
-                    <repositoryName>simple-mock</repositoryName>
-                    <repositoryOwner>saharshsingh</repositoryOwner>
+			<server>github</server>
+			<repositoryName>simple-mock</repositoryName>
+			<repositoryOwner>saharshsingh</repositoryOwner>
 	            </configuration>
 	            <executions>
 	                <execution>
