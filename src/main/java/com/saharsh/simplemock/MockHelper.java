@@ -1,4 +1,4 @@
-package com.redjetresearch.simplemock;
+package com.saharsh.simplemock;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationHandler;

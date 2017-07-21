@@ -1,4 +1,4 @@
-package com.redjetresearch.simplemock;
+package com.saharsh.simplemock;
 
 /**
  * Used to specify mock implementation for a method

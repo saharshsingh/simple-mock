@@ -25,76 +25,53 @@
 	    <dependency>
 	        <groupId>cglib</groupId>
 	        <artifactId>cglib</artifactId>
-	        <version>3.1</version>
+	        <version>3.2.5</version>
 		</dependency>
 
-	    <!-- Logging -->
-		<dependency>
-			<groupId>ch.qos.logback</groupId>
-			<artifactId>logback-core</artifactId>
-			<version>1.1.2</version>
-		</dependency>
-		<dependency>
-			<groupId>ch.qos.logback</groupId>
-			<artifactId>logback-classic</artifactId>
-			<version>1.1.2</version>
-		</dependency>
-		<dependency>
-			<groupId>org.slf4j</groupId>
-			<artifactId>slf4j-api</artifactId>
-			<version>1.7.10</version>
-		</dependency>
-
-		<!-- JUnit -->
+		<!-- Test dependencies -->
 	    <dependency>
 	      <groupId>junit</groupId>
 	      <artifactId>junit</artifactId>
-	      <version>4.11</version>
+	      <version>4.12</version>
 	      <scope>test</scope>
 	    </dependency>
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-simple</artifactId>
+			<version>1.7.25</version>
+			<scope>test</scope>
+		</dependency>
 	</dependencies>
 
-	<properties>
-	    <github.global.server>github</github.global.server>
-	    <project.url>https://github.com/saharshsingh/simple-mock</project.url>
-	</properties>
-
-	<distributionManagement>
-	    <repository>
-	        <id>internal.repo</id>
-	        <name>Temporary Staging Repository</name>
-	        <url>file://${project.build.directory}/mvn-repo</url>
-	    </repository>
-	</distributionManagement>
-
 	<build>
-	    <plugins>
-		    <plugin>
-		        <artifactId>maven-deploy-plugin</artifactId>
-		        <version>2.8.1</version>
-		        <configuration>
-		            <altDeploymentRepository>internal.repo::default::file://${project.build.directory}/mvn-repo</altDeploymentRepository>
-		        </configuration>
-		    </plugin>
-	        <plugin>
-	            <groupId>com.github.github</groupId>
-	            <artifactId>site-maven-plugin</artifactId>
-	            <version>0.12</version>
-	            <configuration>
-	                <message>Creating site for ${project.url}</message>
-			<server>github</server>
-			<repositoryName>simple-mock</repositoryName>
-			<repositoryOwner>saharshsingh</repositoryOwner>
-	            </configuration>
-	            <executions>
-	                <execution>
-	                    <goals>
-	                        <goal>site</goal>
-	                    </goals>
-	                    <phase>deploy</phase>
-	                </execution>
-	            </executions>
-	        </plugin>
-	    </plugins>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.6.1</version>
+            </plugin>
+
+            <!-- Automatic code coverage analysis on all builds -->
+            <plugin>
+                <groupId>org.jacoco</groupId>
+                <artifactId>jacoco-maven-plugin</artifactId>
+                <version>0.7.9</version>
+                <executions>
+                    <execution>
+                        <id>default-prepare-agent</id>
+                        <goals>
+                            <goal>prepare-agent</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>default-report</id>
+                        <phase>verify</phase>
+                        <goals>
+                            <goal>report</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
 	</build>
 </project>

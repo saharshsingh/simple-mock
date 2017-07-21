@@ -1,7 +1,8 @@
-package com.redjetresearch.simplemock;
+package com.saharsh.simplemock;
 
 import java.lang.reflect.Method;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -54,8 +55,7 @@ public class Mock<T> {
      *            mocked. Otherwise list the argument types in order they are
      *            specified for the method of interest.
      */
-    public void setReturnValue(final Object returnValue, String methodName,
-            Class<?>... argumentTypes) {
+    public void setReturnValue(final Object returnValue, String methodName, Class<?>... argumentTypes) {
         setMockImplmentation(new MethodMock() {
             @Override
             public Object runMockImplementation(Object[] args) {
@@ -85,8 +85,7 @@ public class Mock<T> {
      *            mocked. Otherwise list the argument types in order they are
      *            specified for the method of interest.
      */
-    public void setMockImplmentation(MethodMock mockImpl, String methodName,
-            Class<?>... argumentTypes) {
+    public void setMockImplmentation(MethodMock mockImpl, String methodName, Class<?>... argumentTypes) {
         Method method = findMethod(methodName, argumentTypes);
         responses.put(method, mockImpl);
     }
@@ -100,13 +99,13 @@ public class Mock<T> {
      *            Otherwise list the argument types in order they are specified
      *            for the method of interest.
      * @return the arguments passed in during the last time the specified method
-     *         was invoked
+     *         was invoked. 'null' if method has not yet been invoked
      */
     public Object[] getLastRequest(String methodName, Class<?>... argumentTypes) {
         Method method = findMethod(methodName, argumentTypes);
         List<Object[]> requests = capturedRequests.get(method);
         if (requests == null || requests.size() < 1) {
-            return new Object[] {};
+            return null;
         }
         return requests.get(requests.size() - 1);
     }
@@ -123,14 +122,32 @@ public class Mock<T> {
      *         method via the mocked instance
      */
     @SuppressWarnings("unchecked")
-    public List<Object[]> getAllCapturedRequests(String methodName,
-            Class<?>... argumentTypes) {
+    public List<Object[]> getAllCapturedRequests(String methodName, Class<?>... argumentTypes) {
         Method method = findMethod(methodName, argumentTypes);
         ArrayList<Object[]> requests = capturedRequests.get(method);
         if (requests == null) {
             return new ArrayList<Object[]>();
         }
         return (List<Object[]>) requests.clone();
+    }
+
+    /**
+     * Clear all previously captured requests for specified method
+     *
+     * @param methodName
+     *            - name of the instance method
+     * @param argumentTypes
+     *            - leave this blank if only one method by the specified name
+     *            exists, or if the method of interest is a 'no-arg method'.
+     *            Otherwise list the argument types in order they are specified
+     *            for the method of interest.
+     */
+    public void clearCapturedRequests(String methodName, Class<?>... argumentTypes) {
+        Method method = findMethod(methodName, argumentTypes);
+        ArrayList<Object[]> requests = capturedRequests.get(method);
+        if (requests != null) {
+            requests.clear();
+        }
     }
 
     /** Clear all previously captured requests */
@@ -183,46 +200,44 @@ public class Mock<T> {
     }
 
     // find method from mocked type given name and argument types
-    private Method findMethod(String methodName, Class<?>... argumentTypes) {
-
-        if (argumentTypes.length > 0) {
+    private Method findMethod(final String methodName, final Class<?>... argumentTypes) {
+        try {
+            return findMethodInClassHierarchy(mockedType, methodName, argumentTypes);
+        } catch (NoSuchMethodException e) {
             try {
-                return mockedType.getDeclaredMethod(methodName, argumentTypes);
-            } catch (NoSuchMethodException e) {
-                throw new MockException(e);
+                return findMethodInInterfaceHierarchy(mockedType, methodName, argumentTypes);
+            } catch (NoSuchMethodException e1) {
+                throw new MockException(new NoSuchMethodException(
+                        mockedType + "." + methodName + "(" + Arrays.asList(argumentTypes) + ")"));
             }
         }
+    }
 
-        Method method = null;
-        boolean multipleFound = false;
+    private static Method findMethodInClassHierarchy(final Class<?> mockedType, final String methodName,
+            final Class<?>... argumentTypes) throws NoSuchMethodException {
+        try {
+            return mockedType.getDeclaredMethod(methodName, argumentTypes);
+        } catch (NoSuchMethodException e) {
+            if (mockedType.getSuperclass() == null) {
+                throw e;
+            }
+            return findMethodInClassHierarchy(mockedType.getSuperclass(), methodName, argumentTypes);
+        }
+    }
 
-        for (Method candidateMethod : mockedType.getDeclaredMethods()) {
-            if (candidateMethod.getName().equals(methodName)) {
-                if (candidateMethod.getParameterTypes().length == 0) {
-
-                    // exact match - set right away!!
-                    return candidateMethod;
-                } else if (method == null) {
-                    method = candidateMethod;
-                } else {
-
-                    // not throwing exception yet as a no-arg version may exist
-                    multipleFound = true;
+    private static Method findMethodInInterfaceHierarchy(final Class<?> mockedType, final String methodName,
+            final Class<?>... argumentTypes) throws NoSuchMethodException {
+        for (Class<?> _interface : mockedType.getInterfaces()) {
+            try {
+                return _interface.getDeclaredMethod(methodName, argumentTypes);
+            } catch (NoSuchMethodException e) {
+                try {
+                    return findMethodInInterfaceHierarchy(_interface, methodName, argumentTypes);
+                } catch (NoSuchMethodException e1) {
+                    // ignore
                 }
             }
         }
-
-        // check for error
-        if (method == null) {
-            throw new MockException(new NoSuchMethodException(methodName
-                    + " not defined for " + mockedType.getName()));
-        } else if (multipleFound) {
-            throw new MockException("Multiple methods named " + methodName
-                    + " defined in " + mockedType.getName()
-                    + ". Each takes one or more arguments!");
-        }
-
-        // return
-        return method;
+        throw new NoSuchMethodException();
     }
 }

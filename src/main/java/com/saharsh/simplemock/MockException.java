@@ -1,4 +1,4 @@
-package com.redjetresearch.simplemock;
+package com.saharsh.simplemock;
 
 /**
  * Used within the package to wrap around checked exceptions and convert them
