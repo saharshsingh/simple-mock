@@ -14,7 +14,7 @@ public class TestInterfaceMock {
 
     @Before
     public void setup() {
-        mock = MockHelper.mock(InterfaceToMock.class);
+        mock = SimpleMock.mockType(InterfaceToMock.class);
         Assert.assertNotNull(mock);
     }
 
@@ -68,10 +68,20 @@ public class TestInterfaceMock {
 
     @Test
     public void test_setResponse_when_type_abstract_and_declaring_type_interface() {
-        Mock<AbstractImplOfMocked> abstractMock = MockHelper.mock(AbstractImplOfMocked.class);
+        Mock<AbstractImplOfMocked> abstractMock = SimpleMock.mockType(AbstractImplOfMocked.class);
         final SomeClass expected = new SomeClass();
         abstractMock.setReturnValue(expected, "noArgVersionNotDefined", String.class);
         Assert.assertSame(expected, abstractMock.getMocked().noArgVersionNotDefined(""));
+    }
+
+    @Test
+    public void test_mocking_non_existent_method() {
+        try {
+            SimpleMock.mockType(AbstractImplOfMocked.class).setReturnValue(new Object(), "doesNotExist");
+            Assert.fail("Expected exception");
+        } catch (MockException e) {
+            LOGGER.info("Caught expected exception: {}", e.getMessage());
+        }
     }
 
     private static interface InterfaceToMock {
@@ -87,12 +97,16 @@ public class TestInterfaceMock {
 
     }
 
-    private static interface IntermediateInterface extends InterfaceToMock {}
+    private static interface IntermediateInterface extends InterfaceToMock {
+    }
 
-    public static abstract class AbstractImplOfMocked implements IntermediateInterface {}
+    public static abstract class AbstractImplOfMocked implements IntermediateInterface {
+    }
 
-    private static class SomeClass {}
+    private static class SomeClass {
+    }
 
-    private static class AnotherClass {}
+    private static class AnotherClass {
+    }
 
 }

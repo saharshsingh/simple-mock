@@ -25,7 +25,7 @@ public class Mock<T> {
 
     /**
      * Shouldn't be a need to instantiate this outside of
-     * {@link MockHelper#mock(Class)}
+     * {@link SimpleMock#mockType(Class)}
      *
      * @param mockedType
      *            - type of mocked instance wrapped within an instance of this
@@ -207,7 +207,7 @@ public class Mock<T> {
             try {
                 return findMethodInInterfaceHierarchy(mockedType, methodName, argumentTypes);
             } catch (NoSuchMethodException e1) {
-                throw new MockException(new NoSuchMethodException(
+                throw MockException.wrap(new NoSuchMethodException(
                         mockedType + "." + methodName + "(" + Arrays.asList(argumentTypes) + ")"));
             }
         }

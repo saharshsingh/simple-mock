@@ -16,7 +16,7 @@ public class TestClassMock {
 
     @Before
     public void setup() {
-        mock = MockHelper.mock(ClassToMock.class);
+        mock = SimpleMock.mockType(ClassToMock.class);
         Assert.assertNotNull(mock);
     }
 
@@ -160,6 +160,24 @@ public class TestClassMock {
         Assert.assertEquals(0, mock.getAllCapturedRequests("returnSomeClass", int.class, String.class).size());
         Assert.assertNotNull(mock.getLastRequest("returnSomeClass"));
         Assert.assertEquals(1, mock.getAllCapturedRequests("returnSomeClass").size());
+    }
+
+    @Test
+    public void test_clearCapturedRequests_when_no_requests_yet_made() {
+        mock.clearCapturedRequests();
+        Assert.assertEquals(0, mock.getAllCapturedRequests("returnSomeClass", int.class, String.class).size());
+        mock.clearCapturedRequests("returnSomeClass", int.class, String.class);
+        Assert.assertEquals(0, mock.getAllCapturedRequests("returnSomeClass", int.class, String.class).size());
+    }
+
+    @Test
+    public void test_mocking_non_existent_method() {
+        try {
+            mock.setReturnValue(new Object(), "doesNotExist");
+            Assert.fail("Expected exception");
+        } catch (MockException e) {
+            LOGGER.info("Caught expected exception: {}", e.getMessage());
+        }
     }
 
     public static class ClassToMock extends SuperClassOfMocked {

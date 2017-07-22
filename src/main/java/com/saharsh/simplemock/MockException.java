@@ -10,15 +10,14 @@ class MockException extends RuntimeException {
 
 	private static final long serialVersionUID = 4645180969088358242L;
 
-	MockException(Throwable cause) {
+    private MockException(Throwable cause) {
 		super(cause);
 	}
 
-	MockException(String message) {
-		super(message);
-	}
-
-	MockException(String message, Throwable cause) {
-		super(message, cause);
+    public static MockException wrap(Throwable cause) {
+        if (cause instanceof MockException) {
+            return (MockException) cause;
+        }
+        return new MockException(cause);
 	}
 }
