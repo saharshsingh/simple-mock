@@ -1,5 +1,8 @@
+# Generated build files
 bin
 target
+
+# Eclipse IDE files
 .project
 .classpath
 .settings
