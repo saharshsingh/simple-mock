@@ -2,48 +2,47 @@
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
-	<groupId>com.redjetresearch</groupId>
-	<artifactId>simple-mock</artifactId>
-	<version>1.0</version>
-	<packaging>jar</packaging>
-	
-	<name>SimpleMock</name>
-	<description>Very lightweight Java mocking library built for typical unit testing.</description>
-	
-	<licenses>
-		<license>
-			<name>Apache License, Version 2.0</name>
-			<url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
-			<distribution>repo</distribution>
-		</license>
-	</licenses>
+    <groupId>com.redjetresearch</groupId>
+    <artifactId>simple-mock</artifactId>
+    <version>1.0</version>
+    <packaging>jar</packaging>
 
-	<!-- Dependencies -->
-	<dependencies>
+    <name>SimpleMock</name>
+    <description>Very lightweight Java mocking library built for typical unit testing.</description>
 
-	    <!-- Code Generation Library -->
-	    <dependency>
-	        <groupId>cglib</groupId>
-	        <artifactId>cglib</artifactId>
-	        <version>3.2.5</version>
-		</dependency>
+    <licenses>
+        <license>
+            <name>Apache License, Version 2.0</name>
+            <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+            <distribution>repo</distribution>
+        </license>
+    </licenses>
 
-		<!-- Test dependencies -->
-	    <dependency>
-	      <groupId>junit</groupId>
-	      <artifactId>junit</artifactId>
-	      <version>4.12</version>
-	      <scope>test</scope>
-	    </dependency>
-		<dependency>
-			<groupId>org.slf4j</groupId>
-			<artifactId>slf4j-simple</artifactId>
-			<version>1.7.25</version>
-			<scope>test</scope>
-		</dependency>
-	</dependencies>
+    <!-- Dependencies -->
+    <dependencies>
 
-	<build>
+        <!-- Code Generation Library -->
+        <dependency>
+            <groupId>cglib</groupId>
+            <artifactId>cglib</artifactId>
+            <version>3.2.5</version>
+        </dependency>
+
+        <!-- Test dependencies -->
+        <dependency>
+          <groupId>junit</groupId>
+          <artifactId>junit</artifactId>
+          <version>4.12</version>
+          <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-simple</artifactId>
+            <version>1.7.25</version>
+        </dependency>
+    </dependencies>
+
+    <build>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -73,5 +72,5 @@
                 </executions>
             </plugin>
         </plugins>
-	</build>
+    </build>
 </project>

@@ -84,6 +84,10 @@ public class TestSomeClass {
         }, "returnSomeNumber", String.class);
         Assert.assertEquals(100, classUnderTest.returnWhatDependencyReturns());
 
+        // In simple cases, you can just provide a mock return value for a method
+        someDependency.setReturnValue(500, "returnSomeNumber", String.class);
+        Assert.assertEquals(500, classUnderTest.returnWhatDependencyReturns());
+
         // Verify previous invocation of mocked methods
         Object[] argsPassed = someDependency.getLastRequest("returnSomeNumber", String.class);
         Assert.assertEquals(1, argsPassed.length);
