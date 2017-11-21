@@ -10,19 +10,19 @@
     <description>Very lightweight Java mocking library built for typical unit testing.</description>
 
     <scm>
-		<url>https://github.com/saharshsingh/simple-mock</url>
-		<connection>scm:git:git://github.com/saharshsingh/simple-mock.git</connection>
-		<developerConnection>scm:git:git@github.com:saharshsingh/simple-mock.git</developerConnection>
-	</scm>
+        <url>https://github.com/saharshsingh/simple-mock</url>
+        <connection>scm:git:git://github.com/saharshsingh/simple-mock.git</connection>
+        <developerConnection>scm:git:git@github.com:saharshsingh/simple-mock.git</developerConnection>
+    </scm>
 
-	<developers>
-		<developer>
-			<email>singh@saharsh.org</email>
-			<name>Saharsh Singh</name>
-			<url>http://saharsh.org</url>
-			<id>saharshsingh</id>
-		</developer>
-	</developers>
+    <developers>
+        <developer>
+            <email>singh@saharsh.org</email>
+            <name>Saharsh Singh</name>
+            <url>http://saharsh.org</url>
+            <id>saharshsingh</id>
+        </developer>
+    </developers>
 
     <licenses>
         <license>
