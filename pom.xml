@@ -8,6 +8,7 @@
 
     <name>SimpleMock</name>
     <description>Very lightweight Java mocking library built for typical unit testing.</description>
+    <url>https://github.com/saharshsingh/simple-mock</url>
 
     <scm>
         <url>https://github.com/saharshsingh/simple-mock</url>
