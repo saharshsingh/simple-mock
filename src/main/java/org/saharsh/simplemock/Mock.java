@@ -1,4 +1,4 @@
-package com.saharsh.simplemock;
+package org.saharsh.simplemock;
 
 import java.lang.reflect.Method;
 import java.util.ArrayList;
@@ -14,7 +14,7 @@ import java.util.Map;
  * @author Saharsh Singh
  *
  * @param <T>
- *            - type of mocked instance wrapped within an instance of this class
+ *            type of mocked instance wrapped within an instance of this class
  */
 public class Mock<T> {
 
@@ -28,7 +28,7 @@ public class Mock<T> {
      * {@link SimpleMock#mockType(Class)}
      *
      * @param mockedType
-     *            - type of mocked instance wrapped within an instance of this
+     *            type of mocked instance wrapped within an instance of this
      *            class. Specified again here since the parameterized <T> type
      *            is erased during compilation
      */
@@ -46,11 +46,11 @@ public class Mock<T> {
      * this instance
      *
      * @param returnValue
-     *            - value to be returned when the mocked method is called
+     *            value to be returned when the mocked method is called
      * @param methodName
-     *            - name of the instance method to be mocked
+     *            name of the instance method to be mocked
      * @param argumentTypes
-     *            - leave this blank if only one method by the specified name
+     *            leave this blank if only one method by the specified name
      *            exists, or if return value for the no-arg method is being
      *            mocked. Otherwise list the argument types in order they are
      *            specified for the method of interest.
@@ -92,9 +92,9 @@ public class Mock<T> {
 
     /**
      * @param methodName
-     *            - name of the instance method
+     *            name of the instance method
      * @param argumentTypes
-     *            - leave this blank if only one method by the specified name
+     *            leave this blank if only one method by the specified name
      *            exists, or if the method of interest is a 'no-arg method'.
      *            Otherwise list the argument types in order they are specified
      *            for the method of interest.
@@ -112,9 +112,9 @@ public class Mock<T> {
 
     /**
      * @param methodName
-     *            - name of the instance method
+     *            name of the instance method
      * @param argumentTypes
-     *            - leave this blank if only one method by the specified name
+     *            leave this blank if only one method by the specified name
      *            exists, or if the method of interest is a 'no-arg method'.
      *            Otherwise list the argument types in order they are specified
      *            for the method of interest.
@@ -135,9 +135,9 @@ public class Mock<T> {
      * Clear all previously captured requests for specified method
      *
      * @param methodName
-     *            - name of the instance method
+     *            name of the instance method
      * @param argumentTypes
-     *            - leave this blank if only one method by the specified name
+     *            leave this blank if only one method by the specified name
      *            exists, or if the method of interest is a 'no-arg method'.
      *            Otherwise list the argument types in order they are specified
      *            for the method of interest.
@@ -159,9 +159,9 @@ public class Mock<T> {
      * Used by proxies to invoke methods on the mocked instance
      *
      * @param method
-     *            - method to invoke
+     *            method to invoke
      * @param args
-     *            - arguments to pass into the method during invocation
+     *            arguments to pass into the method during invocation
      * @return result of invocation. 'null' if a return value hasn't been set
      *         using {@link Mock#setReturnValue(Object, String, Class...)}
      */

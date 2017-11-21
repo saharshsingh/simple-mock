@@ -1,4 +1,4 @@
-package com.saharsh.simplemock;
+package org.saharsh.simplemock;
 
 import org.junit.Assert;
 import org.junit.Before;
@@ -89,8 +89,8 @@ public class TestFieldMocking {
         try {
             SimpleMock.mockField(instance, "doesNotExist", "SomeValue");
             Assert.fail("Expected exception");
-        } catch(MockException e) {
-            log.info("Caught expected exception: {}", e.getMessage()); 
+        } catch (MockException e) {
+            log.info("Caught expected exception: {}", e.getMessage());
         }
         try {
             SimpleMock.getFieldValue(instance, "doesNotExist", String.class);
@@ -117,7 +117,9 @@ public class TestFieldMocking {
     }
 
     public static class SomeBaseClass {
+        @SuppressWarnings("unused")
         private static String baseStatic = "BaseStaticValue";
+        @SuppressWarnings("unused")
         private String baseField = "BaseField";
         String baseFieldDefaultVisibility = "BaseFieldDefaultVisibility";
         protected String baseFieldProtectedVisibility = "BaseFieldProtectedVisibility";
@@ -125,7 +127,9 @@ public class TestFieldMocking {
     }
 
     public static class SomeClass extends SomeBaseClass {
+        @SuppressWarnings("unused")
         private static String staticField = "StaticValue";
+        @SuppressWarnings("unused")
         private String field = "Field";
         String fieldDefaultVisibility = "FieldDefaultVisibility";
         protected String fieldProtectedVisibility = "FieldProtectedVisibility";

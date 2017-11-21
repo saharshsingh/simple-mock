@@ -1,4 +1,4 @@
-package com.saharsh.simplemock;
+package org.saharsh.simplemock;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationHandler;
@@ -18,7 +18,8 @@ import net.sf.cglib.proxy.MethodProxy;
 public final class SimpleMock {
 
     // static access only
-    private SimpleMock() {}
+    private SimpleMock() {
+    }
 
     /**
      * Creates a mocked instance of the given type. For interfaces a JAVA proxy
@@ -27,8 +28,10 @@ public final class SimpleMock {
      * NOTE: For concrete class types, only classes with a 'no-arg' constructor
      * can be mocked
      *
+     * @param <T>
+     *            type to mock
      * @param toMock
-     *            - type to mock
+     *            type to mock
      * @return a mock container that can be used to inject return values and
      *         capture arguments for specific methods
      */
@@ -91,7 +94,7 @@ public final class SimpleMock {
     /**
      * Use this method to set the value of any static field, regardless of
      * visibility
-     * 
+     *
      * @param containingClass
      *            class containing the instance field.
      * @param fieldName
@@ -132,6 +135,9 @@ public final class SimpleMock {
      * Same as {@link #getFieldValue(Object, String)}, but attempts to cast the
      * returning value with the specified type
      *
+     *
+     * @param <T>
+     *            anticipated type of the field being returned
      * @param target
      *            object containing the instance field
      * @param fieldName
@@ -169,9 +175,11 @@ public final class SimpleMock {
     }
 
     /**
-     * Same as {@link #getStaticFieldValue(Object, String)}, but attempts to
-     * cast the returning value with the specified type
+     * Same as {@link #getStaticFieldValue(Class, String)}, but attempts to cast
+     * the returning value with the specified type
      *
+     * @param <T>
+     *            anticipated type of the field being returned
      * @param containingClass
      *            class containing the static field
      * @param fieldName

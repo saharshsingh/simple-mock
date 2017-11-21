@@ -1,10 +1,13 @@
-package com.saharsh.simplemock;
+package org.saharsh.simplemock;
 
 import java.util.List;
 
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+import org.saharsh.simplemock.Mock;
+import org.saharsh.simplemock.MockException;
+import org.saharsh.simplemock.SimpleMock;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

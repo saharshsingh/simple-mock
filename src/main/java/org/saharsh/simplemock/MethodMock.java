@@ -1,4 +1,4 @@
-package com.saharsh.simplemock;
+package org.saharsh.simplemock;
 
 /**
  * Used to specify mock implementation for a method
@@ -6,5 +6,5 @@ package com.saharsh.simplemock;
  * @author Saharsh Singh
  */
 public interface MethodMock {
-	Object runMockImplementation(Object[] args);
+    Object runMockImplementation(Object[] args);
 }
