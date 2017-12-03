@@ -4,13 +4,13 @@
         <groupId>org.saharsh</groupId>
         <artifactId>master-pom</artifactId>
         <version>1.0</version>
-        <relativePath></relativePath>
+        <relativePath />
     </parent>
 
     <modelVersion>4.0.0</modelVersion>
     <groupId>org.saharsh</groupId>
     <artifactId>simple-mock</artifactId>
-    <version>1.1-SNAPSHOT</version>
+    <version>1.1</version>
 
     <name>SimpleMock</name>
     <description>Very lightweight Java mocking library built for typical unit testing.</description>
@@ -20,7 +20,7 @@
         <url>https://github.com/saharshsingh/simple-mock</url>
         <connection>scm:git:git://github.com/saharshsingh/simple-mock.git</connection>
         <developerConnection>scm:git:git@github.com:saharshsingh/simple-mock.git</developerConnection>
-        <tag>HEAD</tag>
+        <tag>simple-mock-1.1</tag>
     </scm>
 
     <licenses>
