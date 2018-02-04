@@ -1,4 +1,7 @@
 # simple-mock
+[![Maven Central](https://maven-badges.herokuapp.com/maven-central/org.saharsh/simple-mock/badge.svg)](https://maven-badges.herokuapp.com/maven-central/io.dropwizard.metrics/metrics-core/)
+[![Javadoc](http://javadoc-badge.appspot.com/org.saharsh/simple-mock.svg)](http://www.javadoc.io/doc/io.dropwizard.metrics/metrics-core)
+
 Very lightweight Java mocking library built for typical unit testing. Having used various mocking frameworks, I always found myself using very little of the entire framework, while still feeling like I was learning a whole new language. The inspiration behind this library is to keep mocking of dependencies in Java unit testing simple, intuitive, and unopinionated. 
 
 ## Features
